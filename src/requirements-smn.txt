@@ -1,0 +1,11 @@
+# Optional backend for Huawei Cloud SMN notifications.
+#
+# The base tool (requirements.txt) works without these. Install this extra only
+# when you want notifications delivered through Huawei Cloud SMN instead of (or in
+# addition to) the Slack webhook.
+#
+# NOTE: pin the SDK version to the one available in your region. Method/field names
+# can drift between minor versions - verify against the SDK you install before
+# relying on it in production (see docs/18-apply-runtime-gotchas.md).
+huaweicloudsdkcore>=3.1.0
+huaweicloudsdksmn>=3.1.0

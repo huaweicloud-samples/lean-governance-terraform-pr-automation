@@ -1,0 +1,36 @@
+# ============================================================
+# 端到端验证用配置（E2E GitHub PR 自动化）
+#
+# 使用方法：
+#   1. owner 已设为 dgc-git（按你的 GitHub 账号）
+#   2. repo 已设为 tf-pr-test（与你在 GitHub 新建的测试仓库同名）
+#   3. 在 GitHub 测试仓库根目录放一份 variables.tf
+#   4. 运行命令见 README / 验证指南；先 DRY_RUN=true 预览，再正式跑
+#
+# 重要：本配置只用 variables 改动（迁移后真实可用）。
+#       resources 改动当前不会真正落地，演示请勿使用。
+#       真正生效的分支基于环境变量 BASE_BRANCH（默认 main），
+#       若你的 GitHub 仓库默认分支是 master，运行前需设 $env:BASE_BRANCH="master"。
+# ============================================================
+
+repositories:
+  - owner: "dgc-git"
+    repo: "tf-pr-test"
+    files:
+      - path: "variables.tf"
+        changes:
+          variables:
+            - vpc_cidr:
+                default:
+                  update:
+                    - from: ['"192.168.0.0/16"']
+                      to: "192.168.10.0/16"
+                  param_not_found:
+                    action: add
+                    value: "192.168.10.0/16"
+
+settings:
+  base_branch: "main"
+  pr_title_template: "🚀 Update Huawei Cloud Terraform configuration - {{timestamp}}"
+  create_pr: true
+  commit_message_template: "Automated Huawei Cloud Terraform update"

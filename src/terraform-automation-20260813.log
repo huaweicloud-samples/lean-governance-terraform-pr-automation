@@ -1,0 +1,47 @@
+2026-08-13 11:11:40,290 - INFO - Starting Terraform Infrastructure Update Automation
+2026-08-13 11:11:40,291 - INFO - Loading configuration from config.yaml
+2026-08-13 11:11:40,293 - INFO - Validating configuration file structure...
+2026-08-13 11:11:40,295 - INFO - Configuration validation successful
+2026-08-13 11:11:40,297 - INFO - Configuration loaded successfully: 1 repositories
+2026-08-13 11:11:40,298 - INFO - DRY RUN MODE - No changes will be made
+2026-08-13 11:11:40,299 - INFO - Configuration loaded: 1 repositories to process
+2026-08-13 11:11:40,300 - INFO -   - dgc-git/tf-pr-test: 1 files
+2026-08-13 11:12:22,061 - INFO - Starting Terraform Infrastructure Update Automation
+2026-08-13 11:12:22,061 - INFO - Loading configuration from config.yaml
+2026-08-13 11:12:22,063 - INFO - Validating configuration file structure...
+2026-08-13 11:12:22,063 - INFO - Configuration validation successful
+2026-08-13 11:12:22,064 - INFO - Configuration loaded successfully: 1 repositories
+2026-08-13 11:12:22,065 - INFO - DRY RUN MODE - No changes will be made
+2026-08-13 11:12:22,065 - INFO - Configuration loaded: 1 repositories to process
+2026-08-13 11:12:22,065 - INFO -   - dgc-git/tf-pr-test: 1 files
+2026-08-13 11:13:12,547 - INFO - Starting Terraform Infrastructure Update Automation
+2026-08-13 11:13:12,549 - INFO - Loading configuration from config.yaml
+2026-08-13 11:13:12,551 - INFO - Validating configuration file structure...
+2026-08-13 11:13:12,551 - INFO - Configuration validation successful
+2026-08-13 11:13:12,553 - INFO - Configuration loaded successfully: 1 repositories
+2026-08-13 11:13:12,553 - INFO - ============================================================
+2026-08-13 11:13:12,555 - INFO - Processing repository 1/1: dgc-git/tf-pr-test
+2026-08-13 11:13:12,555 - INFO - ============================================================
+2026-08-13 11:13:13,655 - INFO - Initialized updater for repository: dgc-git/tf-pr-test
+2026-08-13 11:13:14,828 - WARNING - Could not check rate limit: 'RateLimitOverview' object has no attribute 'core'
+2026-08-13 11:13:17,840 - INFO - Created branch 'terraform-automation-tf-pr-test-20260813-111313'
+2026-08-13 11:13:17,840 - INFO - Processing file 1/1: variables.tf
+2026-08-13 11:13:17,841 - INFO - Processing file: variables.tf
+2026-08-13 11:13:18,632 - WARNING - Could not check rate limit: 'RateLimitOverview' object has no attribute 'core'
+2026-08-13 11:13:19,428 - INFO - Processing variables changes...
+2026-08-13 11:13:19,437 - INFO - Updated variable 'vpc_cidr' parameter 'default' to '192.168.10.0/16'
+2026-08-13 11:13:19,438 - INFO - Updated default to 192.168.10.0/16
+2026-08-13 11:13:19,452 - WARNING - Terraform CLI not found, skipping formatting
+2026-08-13 11:13:20,919 - WARNING - Could not check rate limit: 'RateLimitOverview' object has no attribute 'core'
+2026-08-13 11:13:22,269 - INFO - Successfully committed changes to variables.tf
+2026-08-13 11:13:23,011 - WARNING - Could not check rate limit: 'RateLimitOverview' object has no attribute 'core'
+2026-08-13 11:13:23,966 - WARNING - Could not check rate limit: 'RateLimitOverview' object has no attribute 'core'
+2026-08-13 11:13:25,742 - WARNING - Could not check rate limit: 'RateLimitOverview' object has no attribute 'core'
+2026-08-13 11:13:26,550 - INFO - Creating new pull request for branch: terraform-automation-tf-pr-test-20260813-111313
+2026-08-13 11:13:28,665 - INFO - Successfully created pull request #1
+2026-08-13 11:13:30,761 - INFO - ✅ Pull Request created: https://github.com/dgc-git/tf-pr-test/pull/1
+2026-08-13 11:13:30,762 - INFO - ============================================================
+2026-08-13 11:13:30,762 - INFO - Terraform automation completed
+2026-08-13 11:13:30,762 - INFO - Repositories processed: 1/1
+2026-08-13 11:13:30,762 - INFO - ✅ All repositories processed successfully
+2026-08-13 11:13:30,762 - INFO - ============================================================
