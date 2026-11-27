@@ -1,0 +1,6 @@
+# Terraform local provider install cache (large, machine-specific)
+.terraform/
+
+# Local override configs (may contain credentials) — keep out of VCS
+*.tfrc
+.terraformrc.local

@@ -1,0 +1,121 @@
+# Huawei Cloud Terraform PR Automation - example configuration
+#
+# This file demonstrates the automation tool operating on Huawei Cloud Terraform
+# configurations (huaweicloud_* resources and modules). Copy it to config.yaml
+# and adjust owners/repos.
+#
+# The tool is provider-agnostic: it edits HCL text, so any Terraform provider
+# (including huaweicloud) works unchanged.
+
+repositories:
+  - owner: "your-github-org"
+    repo: "your-huaweicloud-terraform-repo"
+    files:
+      - path: "resources.tf"
+        changes:
+          resources:
+            # Bump a compute instance flavor
+            - huaweicloud_compute_instance.web:
+                flavor_id:
+                  update:
+                    - from: ["s6.large.2"]
+                      to: "c7.large.2"
+                  param_not_found:
+                    action: error   # critical parameter must exist
+                # Update a security group rule description
+                - huaweicloud_networking_secgroup_rule.allow_web:
+                description:
+                  update:
+                    - from: ["allow inbound from web tier"]
+                      to: "Allow inbound from web tier (hardened)"
+                  param_not_found:
+                    action: add
+                    value: "Allow inbound from web tier (hardened)"
+
+      - path: "variables.tf"
+        changes:
+          variables:
+            - vpc_cidr:
+                default:
+                  update:
+                    - from: ['"192.168.0.0/16"']
+                      to: "192.168.10.0/16"
+                  param_not_found:
+                    action: add
+                    value: "192.168.10.0/16"
+
+      - path: "vpc.tf"
+        changes:
+          modules:
+            - vpc:
+                version:
+                  update:
+                    - from: ["1.5.0"]
+                      to: "1.6.0"
+                  param_not_found:
+                    action: add
+                    value: "1.6.0"
+
+  # A second repository exercising module parameter updates (CCE / 云数据库)
+  - owner: "your-github-org"
+    repo: "terraform-modules"
+    files:
+      - path: "modules/cce/variables.tf"
+        changes:
+          variables:
+            - cluster_version:
+                default:
+                  update:
+                    - from: ["1.27", "1.28"]
+                      to: "1.29"
+                  param_not_found:
+                    action: error
+            - node_flavor:
+                default:
+                  update:
+                    - from: ['["s6.large.2"]']
+                      to: '["c7.large.2"]'
+                  param_not_found:
+                    action: add
+                    value: '["c7.large.2"]'
+
+      - path: "modules/rds/main.tf"
+        changes:
+          resources:
+            - huaweicloud_rds_instance.main:
+                engine_version:
+                  update:
+                    - from: ["8.0", "8.0.28"]
+                      to: "8.0.30"
+                  param_not_found:
+                    action: add
+                    value: "8.0.30"
+                # Nested parameter example (云数据库 instance class)
+                performance_insights_configuration.enabled:
+                  update:
+                    - from: ["false"]
+                      to: "true"
+                  param_not_found:
+                    action: add
+                    value: "true"
+
+# Global settings for the automation tool
+settings:
+  base_branch: "main"
+  pr_title_template: "🚀 Update Huawei Cloud Terraform configuration - {{timestamp}}"
+  create_pr: true
+  commit_message_template: "Automated Huawei Cloud Terraform update"
+
+  # Optional notification settings. The tool supports two backends:
+  #   - Slack  : set SLACK_WEBHOOK_URL
+  #   - SMN    : set HW_SMN_TOPIC_URN + Huawei Cloud credentials (native)
+  # Both can be enabled at the same time.
+  slack:
+    username: "Terraform Bot"
+    icon_emoji: ":terraform:"
+    notify_on_success: true
+    notify_on_error: true
+    notify_batch_summary: true
+    include_changes_summary: true
+    max_changes_displayed: 5
+    include_workflow_links: true
